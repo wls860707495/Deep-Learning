@@ -57,7 +57,7 @@ author: Joseph Redmon*, Santosh Diccala*, Ross Girshick, Ali Farhadi*
 SSD:--->每层卷积均使用default box进行分类与回归。即SSD =  YOLO+Defult box shape + Multi-Scale
 ```
 SSD:Single Shot MultiBox Detector
-author:Wei Liu, Dragomir Anguelov, Dumitru Erhan, Christian Szegedy, Scott Reed, Cheng-Yang Fu, Alexander C.Berg
+author:Wei Liu, Dragomir Anguelov, Dumitru Erhan, Christian Szegedy, Scott Reed, Cheng-Yang Fu，etc.
 ```
 ------------------------------------------------------------------------------------------------------
 RetinaNet：--->聚焦于正样本，降低背景样本在训练中的权重。
