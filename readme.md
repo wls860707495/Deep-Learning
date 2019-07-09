@@ -1,6 +1,7 @@
 # 注
 零基础入门深度学习：https://www.zybuluo.com/hanbingtao/note/433855  
 ## 两阶段方法
+输入图像--->目标候选生成--->对目标候选的图片和特征进行warp--->分类器
 RCNN:
 ```
 Rich feature hierarchies for accurate object detection and semantic segmentation Tech report(v5)   
@@ -47,6 +48,24 @@ author： Jifeng Dai, Yi Li, Kaiming He, Jian Sun
 ```
 对ROI的位置判别更为敏感。  
 ## 单阶段方法
+YOLO：
+```
+You Only Look Once: Unified,Real-Time Object Detection
+author: Joseph Redmon*, Santosh Diccala*, Ross Girshick, Ali Farhadi*
+```
+-----------------------------------------------------------------------------------------------------
+SSD:--->每层卷积均使用default box进行分类与回归。即SSD =  YOLO+Defult box shape + Multi-Scale
+```
+SSD:Single Shot MultiBox Detector
+author:Wei Liu, Dragomir Anguelov, Dumitru Erhan, Christian Szegedy, Scott Reed, Cheng-Yang Fu, Alexander C.Berg
+```
+------------------------------------------------------------------------------------------------------
+RetinaNet：--->聚焦于正样本，降低背景样本在训练中的权重。
+```
+Focal Loss for Dense Object Detection
+author: Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He, Piotr Dollar
+```
+
 
 
 
