@@ -10,3 +10,15 @@ SPP-Net:--->解决RCNN中，每个备选区域都进行特征提取，花费大�
 Spatial Pyramid Pooling in Deep Convolutional Networks for Visual Recognition
 author:Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jian Sun
 ```
+其训练依旧分为多个阶段，步骤繁琐：微调网络+训练SVM+训练回归器  
+Fast RCNN:--->解决SPP-Net缺点，开始使用softmax及ROI Pooling
+```
+Fast R-CNN
+author： Ross Girshick， Microsoft Research
+```
+Region proposals是通过SS提取的，在一定程度上限制了速度
+Faster R-CNN--->使用RPN来提取候选区域
+```
+Faster R-CNN: Towards Real-Time Object Detection with Region Proposal Networks
+Shaoqing Ren, Kaiming He, Ross Girshick, Jian Sun 
+```
