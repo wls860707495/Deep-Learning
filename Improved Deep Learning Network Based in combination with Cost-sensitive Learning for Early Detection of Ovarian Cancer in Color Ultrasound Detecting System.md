@@ -141,6 +141,8 @@ iii.都考虑
 总体流程图如下：
 ![rongqi](https://github.com/wls860707495/Deep-Learning/blob/master/img/hog.png)
 ## 局部二值模式（Local Binary Patterns）纹理灰度与旋转不变性
+LBP（Local Binary Pattern，局部二值模式）是一种用来描述图像局部纹理特征的算子；它具有旋转不变性和灰度不变性等显著的优点。  
+原始的LBP算子定义为在3 * 3的窗口内，以窗口中心像素为阈值，将相邻的8个像素的灰度值与其进行比较，若周围像素值大于中心像素值，则该像素点的位置被标记为1，否则为0。这样，3 * 3邻域内的8个点经比较可产生8位二进制数（通常转换为十进制数即LBP码，共256种），即得到该窗口中心像素点的LBP值，并用这个值来反映该区域的纹理信息。如下图所示
 
 ## 旋转不变的均匀二值模式（ULBP）
 
@@ -151,3 +153,4 @@ https://blog.csdn.net/qq_34106574/article/details/82016442
 https://blog.csdn.net/bitcarmanlee/article/details/82320853  
 https://blog.csdn.net/qq_42714369/article/details/92600543  
 https://www.jianshu.com/p/863b18e54d9c  
+https://blog.csdn.net/jie310600/article/details/84926856
