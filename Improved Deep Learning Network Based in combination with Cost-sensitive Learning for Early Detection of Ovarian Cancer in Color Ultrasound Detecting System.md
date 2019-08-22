@@ -155,8 +155,8 @@ LBP（Local Binary Pattern，局部二值模式）是一种用来描述图像局
 　　通过这样的改进，二进制模式的种类大大减少，而不会丢失任何信息。模式数量由原来的2P种减少为 P ( P-1)+2种，其中P表示邻域集内的采样点数。对于3×3邻域内8个采样点来说，二进制模式由原始的256种减少为58种，这使得特征向量的维数更少，并且可以减少高频噪声带来的影响。
 ## 新的数据扩展方法
 首先计算放射科医生给出的卵巢囊肿定位标签的位置，然后根据标 签的位置计算卵巢囊肿区四个边界的坐标（xt，yt），（xl，yl），（ xb，yb），（ xr，yr）；最后， 以标出的囊肿区部位为中心，包括囊肿区及其周围组织区 9 个图像为展开样本。以左上方区域 为例，图像 m×n 中展开样本 WxW 的坐标区域表示为： 
-![rongqi](https://github.com/wls860707495/Deep-Learning/blob/master/img/PR_194TYI%7DLN9IG4%25(Q87%7DX.png)
-其中 w 代表目标区域的宽度；xl 和 yt 分别是左标签和上标签的横坐标和纵坐标。其他 八个区域的坐标也可以用类似的方法计算  
+![rongqi](https://github.com/wls860707495/Deep-Learning/blob/master/img/append.png)
+其中 W 代表目标区域的宽度；xl 和 yt 分别是左标签和上标签的横坐标和纵坐标。其他 八个区域的坐标也可以用类似的方法计算  
 参考博客：  
 https://blog.csdn.net/qq_34106574/article/details/82016442   
 https://blog.csdn.net/bitcarmanlee/article/details/82320853   
