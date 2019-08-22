@@ -156,7 +156,7 @@ LBP（Local Binary Pattern，局部二值模式）是一种用来描述图像局
 ## 新的数据扩展方法
 
 
-参考博客：
+参考博客：  
 https://blog.csdn.net/qq_34106574/article/details/82016442   
 https://blog.csdn.net/bitcarmanlee/article/details/82320853   
 https://blog.csdn.net/qq_42714369/article/details/92600543   
