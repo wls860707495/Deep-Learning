@@ -149,7 +149,7 @@ LBP（Local Binary Pattern，局部二值模式）是一种用来描述图像局
 从 LBP 的定义可以看出，LBP 算子是灰度不变的，但却不是旋转不变的。图像的旋转就会得到不同的 LBP值。   
 　　Maenpaa等人又将 LBP 算子进行了扩展，提出了具有旋转不变性的 LBP 算子，即不断旋转圆形邻域得到一系列初始定义的 LBP 值，取其最小值作为该邻域的 LBP 值。   
 　　图 2.5 给出了求取旋转不变的 LBP 的过程示意图，图中算子下方的数字表示该算子对应的 LBP 值，图中所示的 8 种 LBP模式，经过旋转不变的处理，最终得到的具有旋转不变性的 LBP 值为 15。也就是说，图中的 8 种 LBP 模式对应的旋转不变的 LBP 模式都是00001111。  
- ![rongqi](https://github.com/wls860707495/Deep-Learning/blob/master/img/LBP.png)
+ ![rongqi](https://github.com/wls860707495/Deep-Learning/blob/master/img/%E6%97%8B%E8%BD%AC%E4%B8%8D%E5%8F%98LBP.png)
 ### 旋转不变的均匀二值模式（ULBP）
 
 
