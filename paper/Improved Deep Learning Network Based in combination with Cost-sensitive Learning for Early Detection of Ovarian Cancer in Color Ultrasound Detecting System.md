@@ -144,6 +144,7 @@ iii.都考虑
 LBP（Local Binary Pattern，局部二值模式）是一种用来描述图像局部纹理特征的算子；它具有旋转不变性和灰度不变性等显著的优点。  
 原始的LBP算子定义为在3 * 3的窗口内，以窗口中心像素为阈值，将相邻的8个像素的灰度值与其进行比较，若周围像素值大于中心像素值，则该像素点的位置被标记为1，否则为0。这样，3 * 3邻域内的8个点经比较可产生8位二进制数（通常转换为十进制数即LBP码，共256种），即得到该窗口中心像素点的LBP值，并用这个值来反映该区域的纹理信息。如下图所示
 ![rongqi](https://github.com/wls860707495/Deep-Learning/blob/master/img/LBP.png)
+对于八采样点的LBP算子来说，特征值范围为0~255，对每个特征值进行统计，比如得到特征值为1的LBP值有多少个、特征值为245的LBP值有多少个等等。这样就形成了一个直方图，该直方图有256个bin，即256个分量，也可以把该直方图当做一个长度为256的向量。
 ### 旋转不变的LBP
 从 LBP 的定义可以看出，LBP 算子是灰度不变的，但却不是旋转不变的。图像的旋转就会得到不同的 LBP值。   
 　　Maenpaa等人又将 LBP 算子进行了扩展，提出了具有旋转不变性的 LBP 算子，即不断旋转圆形邻域得到一系列初始定义的 LBP 值，取其最小值作为该邻域的 LBP 值。   
@@ -324,10 +325,14 @@ LBP（Local Binary Pattern，局部二值模式）是一种用来描述图像局
 首先计算放射科医生给出的卵巢囊肿定位标签的位置，然后根据标 签的位置计算卵巢囊肿区四个边界的坐标（xt，yt），（xl，yl），（ xb，yb），（ xr，yr）；最后， 以标出的囊肿区部位为中心，包括囊肿区及其周围组织区 9 个图像为展开样本。以左上方区域 为例，图像 m×n 中展开样本 WxW 的坐标区域表示为： 
 ![rongqi](https://github.com/wls860707495/Deep-Learning/blob/master/img/append.png)
 其中 W 代表目标区域的宽度；xl 和 yt 分别是左标签和上标签的横坐标和纵坐标。其他 八个区域的坐标也可以用类似的方法计算  
-参考博客：  
+## Relu
+### RELU实现非线性
+ReLu虽然在大于0的区间是线性的，在小于等于0的部分也是线性的，但是它整体不是线性的，因为不是一条直线。多个线性操作的组合也是一个线性操作，没有非线性激活，就相当于只有一个超平面去划分空间。但是ReLu是非线性的，效果类似于划分和折叠空间，组合多个（线性操作 + ReLu）就可以任意的划分空间。
+原文博客链接：  
 https://blog.csdn.net/qq_34106574/article/details/82016442   
 https://blog.csdn.net/bitcarmanlee/article/details/82320853   
 https://blog.csdn.net/qq_42714369/article/details/92600543   
 https://www.jianshu.com/p/863b18e54d9c   
 https://blog.csdn.net/jie310600/article/details/84926856  
-https://blog.csdn.net/heli200482128/article/details/79204008  
+https://blog.csdn.net/heli200482128/article/details/79204008
+https://blog.csdn.net/sinat_36161667/article/details/81878820
