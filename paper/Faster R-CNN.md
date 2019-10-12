@@ -33,10 +33,25 @@ k：每一个滑动窗口的中心位置，预测k个候选区，这些候选区
 对应上图的解释：
  ![rongqi](https://github.com/wls860707495/Deep-Learning/blob/master/img/feature_map_deal_ex.png)
 ### 关与anchor（锚点）
-在ZF-5输出的feature map上进行滑窗操作，是为了获取滑窗对应的感受野内是否存在目标（概率，以及目标的位置坐标），在 ZF-5 输出的 feature map 上进行滑窗操作，是为了获取滑窗对应的感受野内是否存在目标（概率，以及目标的位置坐标），由于目标大小和长宽比例可能不一，因此需要多个窗口。Anchor 的机制是，以滑动窗的中心为采样点，采用不同的 scale（规模，像素点的个数） 和 ratio（比例，即长宽比），生成不同大小共 k 个 anchor 窗口。对于一个W * H小的 feature map 来说，生成的 anchor 总数为WxHxk，例如scale 为（128x128，256x256，512x512），ratio 为（1:2，1:1，2:1）时，则生成 9 种 anchor。  
+在ZF-5输出的feature map上进行滑窗操作，是为了获取滑窗对应的感受野内是否存在目标（概率，以及目标的位置坐标），在 ZF-5 输出的 feature map 上进行滑窗操作，是为了获取滑窗对应的感受野内是否存在目标（概率，以及目标的位置坐标），由于目标大小和长宽比例可能不一，因此需要多个窗口。Anchor 的机制是，以滑动窗的中心为采样点，采用不同的 scale（规模，像素点的个数） 和 ratio（比例，即长宽比），生成不同大小共 k 个 anchor 窗口。对于一个W * H小的 feature map 来说，生成的 anchor 总数为WxHxk，例如scale 为（128x128，256x256，512x512），ratio 为（1:2，1:1，2:1）时，则生成 9 种 anchor。--> 这九个anchor是相对于原图来说的，也就是说，这九个anchor的大小和长宽比例是在原图像上的。  
 采用 Anchor 机制能够从整图的 feature map 上直接提取候选区域（映射到原图）及其特征，相比较 R-CNN 和 Fast R-CNN 中 selective search（或EdgeBoxes） 的方法，避免了大量的额外运算，且整个过程融合到一个网络中，方便训练和测试。
-### 损失函数的训练
-
+### RPN损失函数的训练
+### 框回归
+对于RPN的损失函数，我们得到的anchor boxs为候选区域 --> 设置为A ，但是anchor boxs（A）与真实框（G）之间还有很大的差距，我们的loss通过一个线性变换将
+anchor boxs（A）变换为真实框G‘，使得预测框G'能够近似等于真实框G。此时我们的loss函数由此得来，即d（A） = w^T * f(A),其中d(A)是由anchor boxs（A）通过线性变换得到的预测值，而我们的loss函数目的即让预测值dx（A）、dy（A）、dw（A）、dh（A）与真实值差距tx、ty、tw、th最小，代价函数略（目的即学习参数w使得损失函数最小），其中tx、ty、tw、th公式如下：
+```
+tx = (Gx - Ax)/Aw
+ty = (Gy - Ay)/Ah
+tw = log(Gw / Aw)
+th = log(Gh / Ah)
+```
+### 候选框修正
+目的是为了得到每一个anchor A的修正参数dx（A）、dy（A）、dw（A）、dh（A），如此我们可以计算出精确的anchor，之后按照物体的区域得分从大到小对得到的anchor排序，然后提出一些宽或者高很小的anchor(获取其它过滤条件)，再经过非极大值抑制抑制，取前Top-N的anchors，然后作为proposals(候选框)输出，送入到RoI Pooling层。
+此处RPN网络的出的候选框的分数（只有两类）
+## 分类和框回归
+通过RoI Pooling层我们得到所有候选区组成的特征向量，然后送入全连接层和softmax计算每个候选框具体属于哪个类别，输出类别的得分；同时再次利用框回归获得每个候选框相对于实际位置的偏移量预测值，用于对候选框进行修正，得到更精确的目标检测框。
+## Faster R-CNN训练方式
+Faster R-CNN在使用RPN生成候选框之后，剩下的网络结构和Fast R-CNN一模一样。在训练时，需要训练两个网络，一个是RPN网络，一个是得到框之后的分类网络。通常的方法是交替训练，即在一个batch内，先训练RPN网络一次，再训练分类网络一次。
 
 
 
