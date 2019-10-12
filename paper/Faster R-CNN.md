@@ -16,6 +16,7 @@ FCN的核心在于将CNN最后的全连接层设置为1 x 1的 卷积层（即1x
 ### FCN中的结论
 在对图像进行反卷积融合时，先从深层的特征图开始融合，然后向外一步步融合（即先融合pool4-->在这里，上采样也进行了三次，每次上采样大小等于将要融合的pool层输出特征之的大小，再融合pool3），这样的效果比一步上采样到位效果要好。
 ## RPN（区域生成网络） -->  Faster R-CNN的核心
-
+### 特征图处理详解
+ ![rongqi](https://github.com/wls860707495/Deep-Learning/blob/master/img/feature_map_deal.png)
 
 
