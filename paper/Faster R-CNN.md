@@ -16,7 +16,31 @@ FCN的核心在于将CNN最后的全连接层设置为1 x 1的 卷积层（即1x
 ### FCN中的结论
 在对图像进行反卷积融合时，先从深层的特征图开始融合，然后向外一步步融合（即先融合pool4-->在这里，上采样也进行了三次，每次上采样大小等于将要融合的pool层输出特征之的大小，再融合pool3），这样的效果比一步上采样到位效果要好。
 ## RPN（区域生成网络） -->  Faster R-CNN的核心
+RPN网络的作用是输入一张图像，输出的是一批区域候选区域。其中它的基础网络是由ZF-5和VGG网络构成，在基础网络生成了feature map之后，我们使用特出的sliding windows以及anchor boxs的方式生成锚点框（ROIpooling的候选区域）
 ### 特征图处理详解
+对于ZF-5得到的feature map，采用n * n的方式进行sliding window滑动处理（文中所用的滑动窗口的大小为3 * 3),然后通过1 * 1的卷积网络输出两路，分别用于分类和回归。上图为sliding window的详细处理过程。
  ![rongqi](https://github.com/wls860707495/Deep-Learning/blob/master/img/feature_map_deal.png)
+其中：  
+256-d ：ZF-5的最后一层输出filter的个数为256，因此每一个滑动窗口输出是一个256维的向量。  
+k：每一个滑动窗口的中心位置，预测k个候选区，这些候选区被称为anchor。
+2k scores和4k oordinates：其中2k使用为分类层的输出目标为foreground和background的概率，4k则是每个anchor box包含4个位置坐标。  
+以下为得到类别分数和坐标的详解：
+```
+··· k为单个位置对应的anchor的个数，此时k=9，通过增加一个3×3滑动窗口操作以及两个卷积层完成区域建议功能；
+
+··· 一个卷积层将特征图每个滑窗位置编码成一个特征向量，第二个卷积层对应每个滑窗位置输出k个区域得分，表示该位置的anchor为物体的概率，这部分总输出长度为2×k(一个anchor对应两个输出：是物体的概率+不是物体的概率)和k个回归后的区域建议(框回归)，一个anchor对应4个框回归参数，因此框回归部分的总输出的长度为4×k，并对得分区域进行非极大值抑制后输出得分Top-N(文中为300)区域，告诉检测网络应该注意哪些区域，本质上实现了Selective Search、EdgeBoxes等方法的功能。
+```
+对应上图的解释：
+ ![rongqi](https://github.com/wls860707495/Deep-Learning/blob/master/img/feature_map_deal_ex.png)
+### 关与anchor（锚点）
+在ZF-5输出的feature map上进行滑窗操作，是为了获取滑窗对应的感受野内是否存在目标（概率，以及目标的位置坐标），在 ZF-5 输出的 feature map 上进行滑窗操作，是为了获取滑窗对应的感受野内是否存在目标（概率，以及目标的位置坐标），由于目标大小和长宽比例可能不一，因此需要多个窗口。Anchor 的机制是，以滑动窗的中心为采样点，采用不同的 scale（规模，像素点的个数） 和 ratio（比例，即长宽比），生成不同大小共 k 个 anchor 窗口。对于一个W * H小的 feature map 来说，生成的 anchor 总数为WxHxk，例如scale 为（128x128，256x256，512x512），ratio 为（1:2，1:1，2:1）时，则生成 9 种 anchor。  
+采用 Anchor 机制能够从整图的 feature map 上直接提取候选区域（映射到原图）及其特征，相比较 R-CNN 和 Fast R-CNN 中 selective search（或EdgeBoxes） 的方法，避免了大量的额外运算，且整个过程融合到一个网络中，方便训练和测试。
+### 损失函数的训练
+
+
+
+
+
+
 
 
