@@ -6,3 +6,4 @@
 ### 实验网络
 一共使用了三种网络。第一种为VGG19网络，另外则是顺着VGG网络思维继续加深其层次而形成的一种VGG朴素网络，共有34个含参层。最后一个则是与上述34层朴素网络相对应的Resnet网络（主要由残差单元来构成）。
 ## 特征金字塔
+ ![rongqi](https://github.com/wls860707495/Deep-Learning/blob/master/img/four_dif_featuremap.png)
