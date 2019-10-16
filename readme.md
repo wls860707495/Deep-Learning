@@ -47,6 +47,17 @@ Object Detection via Region-based Fully Convolutional Networks
 author： Jifeng Dai, Yi Li, Kaiming He, Jian Sun
 ```
 对ROI的位置判别更为敏感。  
+
+-----------------------------------------------------------------------------------------------------
+Mask RCNN
+```
+在Faster R-CNN的基础上增加了Mask分支。
+```
+-----------------------------------------------------------------------------------------------------
+Mask Scoring R-CNN（2019 CVPR）
+```
+未看
+```
 ## 单阶段方法
 YOLO：
 ```
@@ -65,7 +76,7 @@ RetinaNet：--->聚焦于正样本，降低背景样本在训练中的权重。
 Focal Loss for Dense Object Detection
 author: Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He, Piotr Dollar
 ```
-Mask Scoring R-CNN（2019 CVPR）
+
 
 
 
