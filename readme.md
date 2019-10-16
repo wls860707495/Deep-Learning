@@ -65,7 +65,7 @@ RetinaNet：--->聚焦于正样本，降低背景样本在训练中的权重。
 Focal Loss for Dense Object Detection
 author: Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He, Piotr Dollar
 ```
-
+Mask Scoring R-CNN（2019 CVPR）
 
 
 
