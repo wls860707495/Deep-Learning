@@ -62,6 +62,8 @@ Faster R-CNN在使用RPN生成候选框之后，剩下的网络结构和Fast R-C
 2、RPN网络使用 1x1 卷积与FCN的最后两层相似（分别输出分数和框的四个坐标）  
 3、在RPN中提出了一种新的候选区域选择办法 --> anchor boxs  
 4、除了新提出的RPN之外，其余部分用的Fast R-CNN，训练网络的方式是这对两部分网络进行交替训练。
+## FCN详解
+https://www.cnblogs.com/gujianhan/p/6030639.html
 
 
 
