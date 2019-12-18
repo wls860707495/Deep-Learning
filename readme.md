@@ -76,7 +76,8 @@ RetinaNet：--->聚焦于正样本，降低背景样本在训练中的权重。
 Focal Loss for Dense Object Detection
 author: Tsung-Yi Lin, Priya Goyal, Ross Girshick, Kaiming He, Piotr Dollar
 ```
-
+## 目标检测方面代码
+json型（2019Google-Objects365冠军）：https://github.com/PaddlePaddle/PaddleDetection/
 
 
 
